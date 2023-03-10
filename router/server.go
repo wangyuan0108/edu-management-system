@@ -34,7 +34,7 @@ func Server() {
 		}
 	}
 
-	if err := server.Run("localhost:4000"); err != nil {
+	if err := server.Run("0.0.0.0:4000"); err != nil {
 		log.Fatalln("运行gin服务失败,请检查端口是否被占用", err.Error())
 	}
 }
