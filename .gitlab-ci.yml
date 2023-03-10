@@ -1,0 +1,66 @@
+stages:
+  - web
+  - golang
+  - deploy
+
+cache:
+  key: edu_system
+  paths:
+    - ./web/node_modules
+    - ./web/client/node_modules
+    - ./web/client/dist
+    - ./app
+    - .cache
+
+job_web:
+  stage: web
+  image: node:14-alpine
+  tags:
+    - edu-front-end
+  script:
+    - npm install pnpm -g
+    - cd ./web && pnpm install && cd ./client && pnpm install
+    - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
+  only:
+    - main
+  artifacts:
+    paths:
+      - ./web/client/dist
+
+job_golang:
+  stage: golang
+  image: golang:alpine
+  tags:
+    - edu-back-end
+  script:
+    - mkdir -p .cache
+    - export GOPATH="$CI_PROJECT_DIR/.cache"
+    - go env -w GOPROXY=https://proxy.golang.com.cn,direct
+    - go get
+    - go test ./test
+    - go build -o app
+    - chmod +x app
+  artifacts:
+    paths:
+      - ./app
+
+job_deploy:
+  stage: deploy
+  image: rockylinux
+  only:
+    - main
+  tags:
+    - edu-front-end
+  script:
+    - yum makecache
+    - yum install -y sshpass rsync openssh-clients
+    - pwd
+    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
+    - export SSHPASS="$PASSWORD"
+    - ls
+    - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh ./dist.tgz root@192.168.0.158:/home/nginx/html/web/
+    - rm -rf dist.tgz
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && tar -xzvf dist.tgz && rm -rf dist.tgz'
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web bash ./dir.sh && rm -f ./dir.sh'
+    - sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".cache" --exclude=".idea" --exclude="tmp" . root@192.168.0.158:/home/nginx/html/web/temp
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && rm -rf ./dist.tgz && bash ./cmd/deploy.sh && rm -rf ../temp'

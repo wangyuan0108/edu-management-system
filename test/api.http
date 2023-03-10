@@ -1,0 +1,150 @@
+# curl 192.168.0.158
+GET 192.168.0.158:4000/
+
+###
+
+# curl  -X POST http://127.0.0.1/register -d'login=emma＆password=123' -F 'avatar=../example/images/avatar.svg'
+
+### 注册
+PUT {{url}}/register
+Content-Type: multipart/form-data; boundary=boundary
+Content-Type: application/json
+
+--boundary
+Content-Disposition: form-data; name="account";
+
+213012020517
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="avatar.svg"
+
+// 发送文件
+< ../uploads/avatar.svg
+
+--boundary
+Content-Disposition: form-data; name="password";
+
+123456
+
+--boundary
+Content-Disposition: form-data; name="username";
+
+张三
+
+--boundary
+Content-Disposition: form-data; name="createdTime";
+
+1676548940678
+
+--boundary
+Content-Disposition: form-data; name="updatedTime";
+
+1676548940678
+
+--boundary
+Content-Disposition: form-data; name="address";
+
+广西桂林市博白县光明村
+
+--boundary
+Content-Disposition: form-data; name="class";
+
+计科技195班
+
+--boundary
+Content-Disposition: form-data; name="college";
+
+电子工程与智能化学院
+
+--boundary
+Content-Disposition: form-data; name="enrollmentDate";
+
+1623272498000
+
+--boundary
+Content-Disposition: form-data; name="nativePlace";
+
+广西博白
+
+--boundary
+Content-Disposition: form-data; name="politicsStatus";
+
+群众
+
+--boundary
+Content-Disposition: form-data; name="profession";
+
+计算机科学与技术
+
+--boundary
+Content-Disposition: form-data; name="birthdate";
+
+960584498000
+
+--boundary
+Content-Disposition: form-data; name="gender";
+
+男
+
+--boundary--
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.json().code === 200, "Response status is not 200");
+});
+%}
+
+### 登录
+POST {{url}}/login
+Accept: application/json
+
+// 账号1
+{ "account" : "student", "password":"123456" }
+
+# 账号2
+# { "account" : "teacher", "password":"123456" }
+
+# 账号3
+# { "account" : "admin", "password":"123456" }
+
+### 获取student的用户历史消息
+GET {{url}}/historyMessage?account=student
+
+
+### 客户端发送WebSocket消息
+WEBSOCKET ws://{{url}}/ws/chat
+Content-Type: application/json
+
+===
+{
+  "user_identity": "student",
+  "room_identity": "1",
+  "data": "hello teacher",
+  "created_at": 1676548940678,
+  "updated_at": 1676548940678
+}
+=== wait-for-server
+=== wait-for-server
+{
+  "user_identity": "teacher",
+  "room_identity": "1",
+  "data": "hello student",
+  "created_at": 1676548940678,
+  "updated_at": 1676548940678
+}
+===
+{
+  "message": "And this message together",
+  "repeat": 1
+}
+
+### 更新用户头像
+PUT {{url}}/upload
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="avatar.svg"
+
+// 发送文件
+< ../example/images/avatar.svg
+--boundary--

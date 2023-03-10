@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="67fffa01-c8ea-4575-ab7a-df3756c81ba8" name="152">
+        <fileTransfer accessType="SFTP" host="192.168.0.152" port="22" sshConfigId="0b67ba43-f6e5-470b-832c-77d89020b068" sshConfig="root@192.168.0.152:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="6a782089-d1ac-46f4-9e7d-cbb9ca0e90d4" name="158">
+        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="6fbc8596-68a7-4a56-ae0b-ede377cb0745" sshConfig="root@192.168.0.158:22">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="6ff1e9a1-4690-4fe9-8521-16c21116aeaa" name="deb">
+        <fileTransfer accessType="SFTP" host="119.91.208.160" port="22" sshConfigId="eec704b6-1ab8-4eb3-b93a-7292cb4a178e" sshConfig="root@119.91.208.160:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+    <groups>
+      <group>
+        <name>Docker</name>
+        <servers>
+          <name value="152" />
+          <name value="158" />
+          <name value="deb" />
+        </servers>
+      </group>
+    </groups>
+  </component>
+</project>
