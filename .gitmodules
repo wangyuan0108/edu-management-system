@@ -1,7 +1,7 @@
 [submodule "web"]
 	path = web
-	url = ../../root/edu-system-client.git
+	url = https://github.com/lookeke/edu-management-system-client.git
 
 [submodule "web"]
 	path = web
-	url = https://github.com/lookeke/edu-management-system-client.git
+	url = ../../root/edu-system-client.git
