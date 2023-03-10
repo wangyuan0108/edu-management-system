@@ -5,6 +5,7 @@ import (
 	"edu-management-system/db"
 	"edu-management-system/schema"
 	"go.mongodb.org/mongo-driver/bson"
+	"log"
 	"os"
 )
 
@@ -16,6 +17,7 @@ func GetSpecialtyList(filter bson.D) ([]schema.Specialty, error) {
 		Collection(schema.Specialty{}.Collection()).
 		Find(context.Background(), filter)
 	if err = cursor.All(context.TODO(), &specialtyList); err != nil {
+		log.Println()
 		return nil, err
 	}
 
