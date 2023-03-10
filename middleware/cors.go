@@ -29,7 +29,7 @@ func Cors() gin.HandlerFunc {
 
 		//允许类型校验
 		if method == "OPTIONS" {
-			c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000, http://192.168.0.158:7000")
+			c.Writer.Header().Set("Access-Control-Allow-Origin", "http://192.168.0.158:7000")
 			c.Writer.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Length, X-CSRF-Token, Token,session,X_Requested_With,Accept, Origin, Host, Connection, Accept-Encoding, Accept-Language,DNT, X-CustomHeader, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, Pragma")
 			c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT")
 			c.Writer.Header().Set("Access-Control-Expose-Headers", "Authorization, Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type")
