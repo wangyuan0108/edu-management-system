@@ -28,9 +28,6 @@ job_web:
 #      - ./web/client/dist
   cache:
     key: job_web
-    policy:
-      max-age: 3
-      - size-limit: 1G
 
 job_golang:
   stage: golang

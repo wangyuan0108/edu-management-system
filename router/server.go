@@ -22,9 +22,13 @@ func Server() {
 		//userGroup.GET("/", middleware.AuthRequired, api.ParseJWT) // 校验用户的JWT是否正确, 如果校验失败则进入不了用户路由
 
 		//server.POST("/login", controller.Login)
-		userGroup.GET("/college", controller.College)
+		userGroup.GET("/college", controller.College{}.GET)
+		userGroup.PATCH("/college", controller.College{}.PATCH)
+		userGroup.POST("/college", controller.College{}.POST)
+		userGroup.DELETE("/college", controller.College{}.DELETE)
+		userGroup.PUT("/college", controller.College{}.PUT)
 		userGroup.PUT("/upload", controller.Upload)
-		userGroup.GET("/specialty", controller.Specialty)
+		userGroup.GET("/specialty", controller.Specialty{}.GET)
 
 		// 聊天路由
 		chatGroup := server.Group("ws")

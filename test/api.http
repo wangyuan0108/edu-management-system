@@ -145,3 +145,7 @@ Content-Disposition: form-data; name="file"; filename="avatar.svg"
 ### 获取专业列表
 GET {{url}}/auth/specialty?specialty=all
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
+
+### 获取学院与专业列表
+GET {{url}}/auth/specialty?specialty=college
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
