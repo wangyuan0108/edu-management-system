@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"edu-management-system/schema"
 	service "edu-management-system/service/api/http"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -28,35 +27,18 @@ func (Specialty) GET(c *gin.Context) {
 		condition = bson.D{{}}
 		result, err = service.Specialty{}.GetList(condition)
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusOK, schema.Status{
-				Code:    400,
-				Message: "查询异常",
-				Body:    nil,
-			})
+			c.AbortWithStatusJSON(http.StatusOK, err)
 			return
 		}
-		c.JSON(http.StatusOK, schema.Status{
-			Code:    http.StatusOK,
-			Message: "获取成功",
-			Body:    result,
-		})
-		return
+		c.JSON(http.StatusOK, result)
 	} else {
 		condition = bson.D{{"name", query}}
 		result, err = service.Specialty{}.GetName(condition)
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusOK, schema.Status{
-				Code:    400,
-				Message: "查询异常",
-				Body:    nil,
-			})
+			c.AbortWithStatusJSON(http.StatusOK, err)
 			return
 		}
-		c.JSON(http.StatusOK, schema.Status{
-			Code:    http.StatusOK,
-			Message: "获取成功",
-			Body:    result,
-		})
+		c.JSON(http.StatusOK, result)
 	}
 }
 

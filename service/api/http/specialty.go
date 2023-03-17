@@ -34,7 +34,7 @@ func (Specialty) GetList(filter any) ([]schema.Specialty, error) {
 }
 
 // GetName 获取单个专业的信息
-func (Specialty) GetName(filter bson.D) (schema.Specialty, error) {
+func (Specialty) GetName(filter bson.D) (schema.Status, error) {
 	var specialtyName schema.Specialty
 	err := db.Mongo().
 		Database(os.Getenv("MONGODB_DB_EDU")).
@@ -43,11 +43,23 @@ func (Specialty) GetName(filter bson.D) (schema.Specialty, error) {
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			log.Println("未查询到结果")
-			return schema.Specialty{}, nil
+			return schema.Status{
+				Code:    404,
+				Message: "未查询到结果",
+				Body:    nil,
+			}, err
 		}
-		return schema.Specialty{}, err
+		return schema.Status{
+			Code:    400,
+			Message: "查询异常",
+			Body:    nil,
+		}, err
 	}
-	return specialtyName, nil
+	return schema.Status{
+		Code:    200,
+		Message: "查询成功",
+		Body:    specialtyName,
+	}, nil
 }
 
 // UpdateSpecialtyWithCollege 更新学院字段

@@ -1,4 +1,3 @@
 [submodule "web"]
 	path = web
 	url = https://github.com/lookeke/edu-management-system-client.git
-
