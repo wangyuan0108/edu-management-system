@@ -19,7 +19,7 @@ type SpecialtyInterface interface {
 type Specialty struct{}
 
 // GetList 获取专业列表
-func (Specialty) GetList(filter any) ([]schema.Specialty, error) {
+func (Specialty) GetList(filter any) (schema.Status, error) {
 	var specialtyList []schema.Specialty
 	cursor, err := db.Mongo().
 		Database(os.Getenv("MONGODB_DB_EDU")).
@@ -27,10 +27,18 @@ func (Specialty) GetList(filter any) ([]schema.Specialty, error) {
 		Find(context.Background(), filter)
 	if err = cursor.All(context.TODO(), &specialtyList); err != nil {
 		log.Println(err)
-		return nil, err
+		return schema.Status{
+			Code:    500,
+			Message: "数据库操作异常",
+			Body:    err.Error(),
+		}, err
 	}
 
-	return specialtyList, nil
+	return schema.Status{
+		Code:    200,
+		Message: "获取专业列表成功",
+		Body:    specialtyList,
+	}, nil
 }
 
 // GetName 获取单个专业的信息

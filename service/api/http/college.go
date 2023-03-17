@@ -22,7 +22,7 @@ type CollegeInterface interface {
 type College struct{}
 
 // GetList 获取学院列表
-func (College) GetList(filter any) ([]schema.Specialty, error) {
+func (College) GetList(filter bson.D) (schema.Status, error) {
 	var specialtyList []schema.Specialty
 	cursor, err := db.Mongo().
 		Database(os.Getenv("MONGODB_DB_EDU")).
@@ -30,31 +30,50 @@ func (College) GetList(filter any) ([]schema.Specialty, error) {
 		Find(context.Background(), filter)
 	if err = cursor.All(context.TODO(), &specialtyList); err != nil {
 		log.Println(err)
-		return nil, err
+		return schema.Status{
+			Code:    500,
+			Message: "数据库异常",
+			Body:    err.Error(),
+		}, err
 	}
 
-	return specialtyList, nil
+	return schema.Status{
+		Code:    200,
+		Message: "获取学院列表成功",
+		Body:    specialtyList,
+	}, nil
 }
 
 // GetCollegeWithSpecialtyList 学院表关联专业表, 返回每个学院的专业信息
-func (College) GetCollegeWithSpecialtyList(pipeline []bson.M) (any, error) {
+func (College) GetCollegeWithSpecialtyList(pipeline []bson.M) (schema.Status, error) {
 	var collegeUnionList []bson.M
 
 	cursor, err := db.Mongo().
 		Database(os.Getenv("MONGODB_DB_EDU")).
 		Collection(schema.College{}.Collection()).
 		Aggregate(context.Background(), pipeline)
-
 	if err != nil {
-		return nil, err
+		return schema.Status{
+			Code:    500,
+			Message: "数据库处理异常",
+			Body:    err.Error(),
+		}, err
 	}
 
 	if err = cursor.All(context.Background(), &collegeUnionList); err != nil {
-		log.Println("err", err)
-		return nil, err
+		log.Println("数据库处理异常:", err)
+		return schema.Status{
+			Code:    500,
+			Message: "数据库处理异常",
+			Body:    err.Error(),
+		}, err
 	}
 
-	return collegeUnionList, nil
+	return schema.Status{
+		Code:    200,
+		Message: "联合查询成功",
+		Body:    collegeUnionList,
+	}, nil
 }
 
 // UpdateCollegeName 更改学院名称
