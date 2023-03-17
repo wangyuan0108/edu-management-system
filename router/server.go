@@ -29,6 +29,7 @@ func Server() {
 		userGroup.PUT("/college", controller.College{}.PUT)
 		userGroup.PUT("/upload", controller.Upload)
 		userGroup.GET("/specialty", controller.Specialty{}.GET)
+		userGroup.PATCH("/specialty", controller.Specialty{}.PATCH)
 
 		// 聊天路由
 		chatGroup := server.Group("ws")

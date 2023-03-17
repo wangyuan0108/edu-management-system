@@ -72,8 +72,6 @@ func (Specialty) GetName(filter bson.D) (schema.Status, error) {
 
 // UpdateSpecialtyWithCollege 更新学院字段
 func (Specialty) UpdateSpecialtyWithCollege(OldCollege, NewCollege string) (schema.Status, error) {
-	log.Println(OldCollege)
-	log.Println(NewCollege)
 	filter := bson.D{{"college", OldCollege}}
 	update := bson.M{"$set": bson.M{"college": NewCollege}}
 
@@ -83,6 +81,27 @@ func (Specialty) UpdateSpecialtyWithCollege(OldCollege, NewCollege string) (sche
 		UpdateMany(context.Background(), filter, update)
 	if err != nil {
 		return schema.Status{}, err
+	}
+
+	return schema.Status{
+		Code:    200,
+		Message: "修改成功",
+		Body:    result,
+	}, nil
+}
+
+// UpdateSpecialty 更新专业文档
+func (Specialty) UpdateSpecialty(filter bson.D, update bson.M) (schema.Status, error) {
+	result, err := db.Mongo().
+		Database(os.Getenv("MONGODB_DB_EDU")).
+		Collection(schema.Specialty{}.Collection()).
+		UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		return schema.Status{
+			Code:    400,
+			Message: "查询错误",
+			Body:    err.Error(),
+		}, err
 	}
 
 	return schema.Status{

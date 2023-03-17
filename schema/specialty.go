@@ -17,6 +17,12 @@ type SpecialtyWithCollege struct {
 	NewSpecialtyDescription string `form:"newSpecialtyName" bson:"name" json:"newSpecialtyName"`
 }
 
+type UpdateSpecialty struct {
+	OldSpecialtyName        string `bson:"old_specialty_name" json:"oldSpecialtyName"`
+	NewSpecialtyName        string `bson:"new_specialty_name" json:"newSpecialtyName"`
+	NewSpecialtyDescription string `bson:"new_specialty_description" json:"newSpecialtyDescription"`
+}
+
 func (Specialty) Collection() string {
 	return "specialty"
 }
