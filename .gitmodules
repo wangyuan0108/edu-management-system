@@ -1,7 +1,7 @@
 [submodule "web"]
 	path = web
-	url = https://ghproxy.com/https://github.com/lookeke/edu-management-system
-
+	url = https://ghproxy.com/https://github.com/lookeke/edu-management-system.git
+	
 # [submodule "web"]
 # 	path = web
 # 	url = ../edu-system-client.git
