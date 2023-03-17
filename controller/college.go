@@ -52,13 +52,18 @@ func (College) GET(c *gin.Context) {
 		filter := bson.D{{}}
 		specialties, err := service.College{}.GetList(filter)
 		if err != nil {
+			c.AbortWithStatusJSON(http.StatusOK, err)
 			return
 		}
-		c.JSON(http.StatusOK, schema.Status{
-			Code:    200,
-			Message: "获取所有列表成功",
-			Body:    specialties,
-		})
+		c.JSON(http.StatusOK, specialties)
+	} else {
+		filter := bson.D{{"name", query}}
+		specialties, err := service.College{}.GetCollegeOne(filter)
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusOK, err)
+			return
+		}
+		c.JSON(http.StatusOK, specialties)
 	}
 }
 

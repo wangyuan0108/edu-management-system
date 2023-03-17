@@ -5,6 +5,7 @@ import (
 	"edu-management-system/db"
 	"edu-management-system/schema"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"log"
 	"net/http"
 	"os"
@@ -152,4 +153,31 @@ func (College) DeleteCollegeOne(filter bson.D) (schema.Status, error) {
 		Message: "删除成功",
 		Body:    result,
 	}, err
+}
+
+func (College) GetCollegeOne(filter bson.D) (schema.Status, error) {
+	var collegeInfo schema.College
+	err := db.Mongo().
+		Database(os.Getenv("MONGODB_DB_EDU")).
+		Collection(schema.College{}.Collection()).
+		FindOne(context.Background(), filter).Decode(&collegeInfo)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return schema.Status{
+				Code:    404,
+				Message: "查询的内容在数据中不存在",
+				Body:    nil,
+			}, err
+		}
+		return schema.Status{
+			Code:    400,
+			Message: "参数异常",
+			Body:    nil,
+		}, err
+	}
+	return schema.Status{
+		Code:    200,
+		Message: "查询成功",
+		Body:    collegeInfo,
+	}, nil
 }

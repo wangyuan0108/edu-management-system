@@ -142,11 +142,18 @@ Content-Disposition: form-data; name="file"; filename="avatar.svg"
 < ../example/images/avatar.svg
 --boundary--
 
-### 获取专业列表
+### 获取专业列表列表
 GET {{url}}/auth/specialty?query=all
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
 
-### 获取学院与专业列表
+### 根据专业名称搜索
 GET {{url}}/auth/specialty?query=航空航天
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
 
+### 获取学院列表
+GET {{url}}/auth/college?query=all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
+
+### 获取学院与专业列表
+GET {{url}}/auth/college?query=specialty
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
