@@ -6,11 +6,11 @@ stages:
 cache:
   key: edu_system
   paths:
-    - ./web/node_modules
-    - ./web/client/node_modules
+#    - ./web/node_modules
+#    - ./web/client/node_modules
     - ./web/client/dist
     - ./app
-    - .cache
+#    - .cache
 
 job_web:
   stage: web
@@ -21,6 +21,8 @@ job_web:
     - npm install pnpm -g
     - cd ./web && pnpm install && cd ./client && pnpm install
     - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
+#    - rm -rf ./web/node_modules
+    - ls
   only:
     - main
 #  artifacts: 提供生产包
@@ -35,8 +37,10 @@ job_golang:
   tags:
     - edu-back-end
   script:
-    - mkdir -p .cache
-    - export GOPATH="$CI_PROJECT_DIR/.cache"
+#    - mkdir -p .cache
+#    - export GOPATH="$CI_PROJECT_DIR/.cache"
+#    - rm -rf $CI_PROJECT_DIR/.cache
+    - ls
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
     - go test ./test
@@ -57,7 +61,9 @@ job_deploy:
     - yum makecache
     - yum install -y sshpass rsync openssh-clients
     - pwd
-    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
+    - ls
+#    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
+    - tar -czvf dist.tgz --exclude=node_modules -C ./client/dist . --remove-files
     - export SSHPASS="$PASSWORD"
     - ls
     - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh ./dist.tgz root@192.168.0.158:/home/nginx/html/web/
