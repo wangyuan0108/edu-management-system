@@ -37,7 +37,7 @@ job_golang:
     - edu-back-end
   script:
     - mkdir -p .cache
-    - export GOPATH="vendor"
+    - export GOPATH="$CI_PROJECT_DIR/.cache"
     - ls
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
