@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd /home/nginx/html/web
 ls
 echo "正在递归生成dist压缩包文件的MD5值"
