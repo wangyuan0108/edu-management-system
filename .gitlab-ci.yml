@@ -19,7 +19,8 @@ job_web:
     - edu-front-end
   script:
     - npm install pnpm -g
-    - cd ./web && pnpm install && cd ./client && pnpm install
+    - ls
+    - cd ./web && pnpm install &&ls&& cd ./client && pnpm install
     - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
 #    - rm -rf ./web/node_modules
     - ls
@@ -28,8 +29,6 @@ job_web:
 #  artifacts: 提供生产包
 #    paths:
 #      - ./web/client/dist
-  cache:
-    key: job_web
 
 job_golang:
   stage: golang
@@ -61,9 +60,9 @@ job_deploy:
     - yum makecache
     - yum install -y sshpass rsync openssh-clients
     - pwd
-    - ls
-#    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
-    - tar -czvf dist.tgz --exclude=node_modules -C ./client/dist . --remove-files
+    - ls ./web/client
+    - ls ./web/client/dist
+    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
     - export SSHPASS="$PASSWORD"
     - ls
     - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh ./dist.tgz root@192.168.0.158:/home/nginx/html/web/
