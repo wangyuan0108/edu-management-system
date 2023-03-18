@@ -6,11 +6,11 @@ stages:
 cache:
   key: edu_system
   paths:
-#    - ./web/node_modules
-#    - ./web/client/node_modules
+    - ./web/node_modules
+    - ./web/client/node_modules
     - ./web/client/dist
     - ./app
-#    - .cache
+    - .cache
 
 job_web:
   stage: web
@@ -36,9 +36,8 @@ job_golang:
   tags:
     - edu-back-end
   script:
-#    - mkdir -p .cache
-#    - export GOPATH="$CI_PROJECT_DIR/.cache"
-#    - rm -rf $CI_PROJECT_DIR/.cache
+    - mkdir -p .cache
+    - export GOPATH="$CI_PROJECT_DIR/.cache"
     - ls
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
@@ -60,14 +59,10 @@ job_deploy:
     - yum makecache
     - yum install -y sshpass rsync openssh-clients
     - pwd
-    - ls ./web/client
-    - ls ./web/client/dist
     - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
     - export SSHPASS="$PASSWORD"
     - ls
-    - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh ./dist.tgz root@192.168.0.158:/home/nginx/html/web/
-    - rm -rf dist.tgz
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && tar -xzvf dist.tgz && rm -rf dist.tgz'
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web bash ./dir.sh && rm -f ./dir.sh'
-    - sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".cache" --exclude=".idea" --exclude="tmp" . root@192.168.0.158:/home/nginx/html/web/temp
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && rm -rf ./dist.tgz && bash ./cmd/deploy.sh && rm -rf ../temp'
+    - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh dist.tgz root@192.168.0.158:/home/nginx/html/web
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && ls && bash dir.sh && tar -xzvf dist.tgz && ls && rm -rf dist.tgz && rm -f dir.sh'
+    - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/deploy.sh && rm -rf /home/nginx/html/web'
