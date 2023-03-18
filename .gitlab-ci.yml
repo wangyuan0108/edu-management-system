@@ -22,7 +22,7 @@ job_web:
     - ls
     - cd ./web && pnpm install &&ls&& cd ./client && pnpm install
     - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
-#    - rm -rf ./web/node_modules
+    #    - rm -rf ./web/node_modules
     - ls
   only:
     - main
@@ -65,6 +65,6 @@ job_deploy:
     - export SSHPASS="$PASSWORD"
     - ls
     - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh ./cmd/check_md5.sh edu_system_rc1_md5.txt dist.tgz root@192.168.0.158:/home/nginx/html/web
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && ls && md5sum dist.tgz > edu_system_rc2_md5.txt && diff edu_system_rc1_md5.txt edu_system_rc2_md5.txt && bash dir.sh && check_md5.sh &&tar -xzvf dist.tgz && ls && rm -rf dist.tgz && rm -f dir.sh'
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'bash deploy.sh'
     - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/deploy.sh && rm -rf /home/nginx/html/web'
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web'

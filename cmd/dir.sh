@@ -6,7 +6,9 @@ dir=/home/nginx/html/web/temp
 res=$(ls -A $dir)
 # 检查该目录是否有文件, 没有则创建
 if [ -z "$res" ]; then
+  echo "已存在临时目录,正在删除"
   rm -rf /home/nginx/html/web/temp
 else
+  echo "不存在临时目录,正在创建"
   mkdir -p /home/nginx/html/web/temp
 fi
