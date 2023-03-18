@@ -58,7 +58,7 @@ job_deploy:
     - edu-front-end
   script:
     - yum makecache
-    - yum install -y sshpass rsync openssh-clients
+    - yum install -y sshpass rsync openssh-clients find xargs
     - pwd
     - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
     - find dist.tgz -type f -print0 | xargs -0 md5sum > edu_system_rc1_md5.txt
