@@ -61,10 +61,10 @@ job_deploy:
     - yum install -y sshpass rsync openssh-clients
     - pwd
     - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
-    - find ./dist.tgz -type f -print0 | xargs -0 md5sum > edu_system_md5.txt
+    - find dist.tgz -type f -print0 | xargs -0 md5sum > edu_system_rc1_md5.txt
     - export SSHPASS="$PASSWORD"
     - ls
-    - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh ./cmd/check_md5.sh edu_system_rc1_md5.txt dist.tgz root@192.168.0.158:/home/nginx/html/web
+    - sshpass -e scp -o stricthostkeychecking=no ./cmd/* edu_system_rc1_md5.txt dist.tgz root@192.168.0.158:/home/nginx/html/web
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'bash deploy.sh'
     - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web'
