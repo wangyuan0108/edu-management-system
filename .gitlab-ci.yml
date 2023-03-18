@@ -10,7 +10,7 @@ cache:
     - ./web/client/node_modules
     - ./web/client/dist
     - ./app
-    - .cache
+    - ./vendor
 
 job_web:
   stage: web
@@ -37,10 +37,11 @@ job_golang:
     - edu-back-end
   script:
     - mkdir -p .cache
-    - export GOPATH="$CI_PROJECT_DIR/.cache"
+    - export GOPATH="vendor"
     - ls
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
+    - go mod vendor
     - go test ./test
     - go build -o app
     - chmod +x app
