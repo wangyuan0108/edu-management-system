@@ -58,13 +58,13 @@ job_deploy:
     - edu-front-end
   script:
     - yum makecache
-    - yum install -y sshpass rsync openssh-clients
+    - yum install -y sshpass rsync openssh-clients findutils
     - pwd
     - echo $PATH
     - which find
     - which xargs
     - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
-    - /usr/bin/find dist.tgz -type f -print0 | /usr/bin/xargs -0 md5sum > edu_system_rc1_md5.txt
+    - find dist.tgz -type f -print0 | xargs -0 md5sum > edu_system_rc1_md5.txt
     - export SSHPASS="$PASSWORD"
     - ls
     - sshpass -e scp -o stricthostkeychecking=no ./cmd/* edu_system_rc1_md5.txt dist.tgz root@192.168.0.158:/home/nginx/html/web
