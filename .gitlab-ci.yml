@@ -66,8 +66,6 @@ job_deploy:
     - yum install -y sshpass rsync openssh-clients findutils
     - pwd
     - echo $PATH
-    - which find
-    - which xargs
     - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
     - find dist.tgz -type f -print0 | xargs -0 md5sum > edu_system_rc1_md5.txt
     - export SSHPASS="$PASSWORD"
