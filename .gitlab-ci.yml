@@ -71,6 +71,6 @@ job_deploy:
     - export SSHPASS="$PASSWORD"
     - ls
     - sshpass -e scp -o stricthostkeychecking=no ./cmd/* edu_system_rc1_md5.txt dist.tgz root@192.168.0.158:/home/nginx/html/web
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'ls && bash deploy.sh'
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && ls &&bash deploy.sh'
     - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web'
