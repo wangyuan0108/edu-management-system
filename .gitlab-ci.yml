@@ -19,7 +19,7 @@ job_web:
     - edu-front-end
   script:
     - npm config get registry
-    - npm install --registry=http://registry.npmmirror.com
+    - npm config set registry https://registry.npmmirror.com
     - npm config get registry
     - npm install pnpm -g
     - ls
