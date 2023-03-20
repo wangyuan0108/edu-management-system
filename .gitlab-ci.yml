@@ -61,7 +61,7 @@ job_deploy:
       -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g' \
       -i.bak \
       /etc/yum.repos.d/Rocky-*.repo
-      dnf makecache
+    - dnf makecache
     - yum makecache
     - yum install -y sshpass rsync openssh-clients findutils
     - pwd
