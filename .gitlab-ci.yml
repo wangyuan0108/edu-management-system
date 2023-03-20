@@ -52,7 +52,7 @@ job_golang:
 
 job_deploy:
   stage: deploy
-  image: centos:7
+  image: rockylinux
   only:
     - main
   tags:
