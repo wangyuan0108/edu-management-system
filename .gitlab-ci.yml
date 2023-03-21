@@ -67,7 +67,7 @@ job_deploy:
     #    - yum makecache
     # - yum clean all && yum makecache
     - yum clean all
-    - dnf makecache
+#    - dnf makecache
     - yum install -y sshpass rsync findutils openssh-clients
     - pwd
     - echo $PATH
