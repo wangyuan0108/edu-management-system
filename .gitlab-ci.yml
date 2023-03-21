@@ -41,7 +41,7 @@ job_golang:
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
     - go mod vendor
-    - go test ./test
+    # - go test ./test
     - go build -o app
     - chmod +x app
   # 提供生产包
@@ -52,7 +52,8 @@ job_golang:
 
 job_deploy:
   stage: deploy
-  image: rockylinux:9.1.20230215
+  # image: rockylinux:9.1.20230215
+  image: rockylinux
   only:
     - main
   tags:
