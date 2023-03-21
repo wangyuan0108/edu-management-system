@@ -8,7 +8,6 @@ res=$(ls -A $dir)
 if [ -z "$res" ]; then
   echo "已存在临时目录,正在删除"
   rm -rf /home/nginx/html/web/temp
-else
-  echo "不存在临时目录,正在创建"
+echo "正在创建临时目录"
   mkdir -p /home/nginx/html/web/temp
 fi
