@@ -3,21 +3,28 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="67fffa01-c8ea-4575-ab7a-df3756c81ba8" name="152">
-        <fileTransfer accessType="SFTP" host="192.168.0.152" port="22" sshConfigId="0b67ba43-f6e5-470b-832c-77d89020b068" sshConfig="root@192.168.0.152:22 password">
+        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="b4cb5c91-89d5-4412-8c88-d862c475a93a" sshConfig="root@192.168.0.158:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
       <webServer id="6a782089-d1ac-46f4-9e7d-cbb9ca0e90d4" name="158">
-        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="6fbc8596-68a7-4a56-ae0b-ede377cb0745" sshConfig="root@192.168.0.158:22">
+        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="b4cb5c91-89d5-4412-8c88-d862c475a93a" sshConfig="root@192.168.0.158:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="6ff1e9a1-4690-4fe9-8521-16c21116aeaa" name="deb">
-        <fileTransfer accessType="SFTP" host="119.91.208.160" port="22" sshConfigId="eec704b6-1ab8-4eb3-b93a-7292cb4a178e" sshConfig="root@119.91.208.160:22 password">
+      <webServer id="f7a89f03-e89e-47e5-80a0-3bc8d544cd5a" name="119.91.208.160">
+        <fileTransfer accessType="SFTP" host="119.91.208.160" port="22" sshConfigId="1e0af94b-dafb-4026-965a-7b319645fe81" sshConfig="root@119.91.208.160:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="8ab8ce3f-1156-4326-a258-6a7eaa9344e9" name="43.139.143.207">
+        <fileTransfer accessType="SFTP" host="43.139.143.207" port="22" sshConfigId="ac02cedc-9d94-4588-888d-ca7f7ae1f5e6" sshConfig="root@43.139.143.207:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
@@ -26,11 +33,17 @@
     </option>
     <groups>
       <group>
-        <name>Docker</name>
+        <name>Local Server</name>
         <servers>
           <name value="152" />
           <name value="158" />
-          <name value="deb" />
+        </servers>
+      </group>
+      <group>
+        <name>Public Sever</name>
+        <servers>
+          <name value="119.91.208.160" />
+          <name value="43.139.143.207" />
         </servers>
       </group>
     </groups>

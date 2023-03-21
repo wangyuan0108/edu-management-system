@@ -53,7 +53,8 @@ job_golang:
 job_deploy:
   stage: deploy
   # image: rockylinux:9.1.20230215
-  image: rockylinux:latest
+#  image: rockylinux:latest
+  image: centos:7
   only:
     - main
   tags:

@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+      <paths name="119.91.208.160">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="152">
         <serverdata>
           <mappings>
@@ -16,7 +23,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="deb">
+      <paths name="43.139.143.207">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
