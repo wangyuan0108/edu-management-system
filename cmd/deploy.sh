@@ -7,7 +7,8 @@ md5sum dist.tgz > edu_system_rc2_md5.txt
 echo "比较本地与远程MD5文件的内容"
 diff edu_system_rc1_md5.txt edu_system_rc2_md5.txt
 $result=$?
-if [ $result -eq 0 ]; then
+echo $result
+if (($result == 0)); then
 echo "两个文件的MD5相同"
 else 
 echo "两个文件的MD5不同, 退出"
