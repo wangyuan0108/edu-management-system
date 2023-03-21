@@ -59,22 +59,14 @@ job_deploy:
   tags:
     - edu-front-end
   script:
-    - sed -e 's|^mirrorlist=|#mirrorlist=|g' \
-      -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g' \
-      -i.bak \
-      /etc/yum.repos.d/Rocky-*.repo
-    - dnf makecache
-#    - yum clean all
-#    - yum makecache
-    - yum install -y sshpass rsync findutils openssh-clients
-    - pwd
-    - echo $PATH
-    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
-    - find dist.tgz -type f -print0 | xargs -0 md5sum > edu_system_rc1_md5.txt
-    - export SSHPASS="$PASSWORD"
+    - yum makecache
+    - yum install -y sshpass rsync openssh-clients
     - ls
-    - sshpass -e scp -o stricthostkeychecking=no ./cmd/* edu_system_rc1_md5.txt dist.tgz root@192.168.0.158:/home/nginx/html/web
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && ls &&bash deploy.sh'
+    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
+    - export SSHPASS="$PASSWORD"
+    - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh dist.tgz root@192.168.0.158:/home/nginx/html/web
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && ls && bash dir.sh'
+    # 排除无关文件 把go所需的文件移动到temp临时目录
     - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web'
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web && rm -rf /home/nginx/html/web/temp'
     - echo "OK"
