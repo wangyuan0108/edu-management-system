@@ -68,6 +68,6 @@ job_deploy:
     - sshpass -e scp -o stricthostkeychecking=no ./cmd/dir.sh dist.tgz root@192.168.0.158:/home/nginx/html/web
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web && ls && bash dir.sh'
     # 排除无关文件 把go所需的文件移动到temp临时目录
-    - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no" --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
+    - sshpass -e rsync -a -e ssh -o stricthostkeychecking=no --exclude="web" --exclude=".git" --exclude=".idea" --exclude="tmp" --exclude=".cache" . root@192.168.0.158:/home/nginx/html/web/temp
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web && rm -rf /home/nginx/html/web/temp'
     - echo "OK"
