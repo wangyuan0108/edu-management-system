@@ -66,6 +66,12 @@ job_deploy:
     #    - dnf makecache
     #    - yum makecache
     # - yum clean all && yum makecache
+    - sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+    -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g' \
+    -i.bak \
+    /etc/yum.repos.d/rocky-extras.repo \
+    /etc/yum.repos.d/rocky.repo
+    - dnf makecache
     - yum install -y sshpass rsync findutils openssh-clients
     - pwd
     - echo $PATH
