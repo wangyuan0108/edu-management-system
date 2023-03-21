@@ -53,21 +53,19 @@ job_golang:
 job_deploy:
   stage: deploy
   # image: rockylinux:9.1.20230215
-  image: rockylinux
+  image: rockylinux:latest
   only:
     - main
   tags:
     - edu-front-end
   script:
-    #    - sed -e 's|^mirrorlist=|#mirrorlist=|g' \
-    #      -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g' \
-    #      -i.bak \
-    #      /etc/yum.repos.d/Rocky-*.repo
-    #    - dnf makecache
-    #    - yum makecache
-    # - yum clean all && yum makecache
-    - yum clean all
-#    - dnf makecache
+    - sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+      -e 's|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.aliyun.com/rockylinux|g' \
+      -i.bak \
+      /etc/yum.repos.d/Rocky-*.repo
+    - dnf makecache
+#    - yum clean all
+#    - yum makecache
     - yum install -y sshpass rsync findutils openssh-clients
     - pwd
     - echo $PATH
