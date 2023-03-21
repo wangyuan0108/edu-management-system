@@ -52,7 +52,7 @@ job_golang:
 
 job_deploy:
   stage: deploy
-  image: rockylinux:9.1.20230215-minimal
+  image: rockylinux:9.1.20230215
   only:
     - main
   tags:
