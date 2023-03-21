@@ -64,7 +64,7 @@ job_deploy:
     #      /etc/yum.repos.d/Rocky-*.repo
     #    - dnf makecache
     #    - yum makecache
-    - yum clean all && yum makecache
+    # - yum clean all && yum makecache
     - yum install -y sshpass rsync findutils openssh-clients
     - pwd
     - echo $PATH
