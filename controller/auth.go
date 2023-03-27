@@ -9,7 +9,7 @@ import (
 
 type LoginBasic struct {
 	Account  string `bson:"account" json:"account" binding:"required"`
-	Password string `bson:"password" json:"password" binding:"required" `
+	Password string `bson:"password" json:"password" binding:"required"`
 }
 
 func Auth(c *gin.Context) {
@@ -23,6 +23,10 @@ func Auth(c *gin.Context) {
 		return
 	}
 
-	result := service.RoleAuth(person)
+	result, err := service.RoleAuth(person)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusOK, err)
+		return
+	}
 	c.JSON(http.StatusOK, result)
 }

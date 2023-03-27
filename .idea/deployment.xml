@@ -2,7 +2,21 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="119.91.208.160">
+      <paths name="119 Nich 4G2C CentOS7">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="139 Nich 2C4G Rocky8">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="139.102 Nich 2C4G Rocky8">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -23,7 +37,14 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="43.139.143.207">
+      <paths name="43 Xiaowen 2C2G CentOS7">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="47 Lisa 2C2G Docker">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

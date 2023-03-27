@@ -37,11 +37,19 @@ func (College) AddCollegeOne(college schema.College) (schema.Status, error) {
 		Collection(schema.College{}.Collection()).
 		Find(context.Background(), filter)
 	if queryErr != nil {
-		return schema.Status{}, queryErr
+		return schema.Status{
+			Code:    404,
+			Message: "服务器处理学院列表失败:" + queryErr.Error(),
+			Body:    nil,
+		}, queryErr
 	}
 
 	if err := findResult.All(context.Background(), &collegeList); err != nil {
-		return schema.Status{}, err
+		return schema.Status{
+			Code:    500,
+			Message: "请求学院列表失败:" + queryErr.Error(),
+			Body:    nil,
+		}, err
 	}
 
 	for _, v := range collegeList {

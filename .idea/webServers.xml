@@ -3,47 +3,71 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="67fffa01-c8ea-4575-ab7a-df3756c81ba8" name="152">
-        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="b4cb5c91-89d5-4412-8c88-d862c475a93a" sshConfig="root@192.168.0.158:22 password">
+        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="b4cb5c91-89d5-4412-8c88-d862c475a93a" sshConfig="158 Private 8C24G CentOS">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
       <webServer id="6a782089-d1ac-46f4-9e7d-cbb9ca0e90d4" name="158">
-        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="b4cb5c91-89d5-4412-8c88-d862c475a93a" sshConfig="root@192.168.0.158:22 password">
+        <fileTransfer accessType="SFTP" host="192.168.0.158" port="22" sshConfigId="b4cb5c91-89d5-4412-8c88-d862c475a93a" sshConfig="158 Private 8C24G CentOS">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="1ae03762-fa57-4176-89cf-f3d019f96cf9" name="47 Lisa 2C2G Docker">
+        <fileTransfer accessType="SFTP" host="47.120.5.83" port="22" sshConfigId="2c3ae638-1d1d-4e74-9aea-af2e1d0d6070" sshConfig="47 Lisa 2C2G Docker">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="894977d7-6dfb-4277-80d5-793186ae98d9" name="119 Nich 4G2C CentOS7">
+        <fileTransfer accessType="SFTP" host="119.91.208.160" port="22" sshConfigId="1e0af94b-dafb-4026-965a-7b319645fe81" sshConfig="119 Nich 2C4G Rocky8">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="f7a89f03-e89e-47e5-80a0-3bc8d544cd5a" name="119.91.208.160">
-        <fileTransfer accessType="SFTP" host="119.91.208.160" port="22" sshConfigId="1e0af94b-dafb-4026-965a-7b319645fe81" sshConfig="root@119.91.208.160:22 password">
+      <webServer id="7b5fe19d-03ef-4a04-98b6-4ea2862daadb" name="43 Xiaowen 2C2G CentOS7">
+        <fileTransfer accessType="SFTP" host="43.139.143.207" port="22" sshConfigId="ac02cedc-9d94-4588-888d-ca7f7ae1f5e6" sshConfig="43 Xiaowen 2C2G CentOS7">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="8ab8ce3f-1156-4326-a258-6a7eaa9344e9" name="43.139.143.207">
-        <fileTransfer accessType="SFTP" host="43.139.143.207" port="22" sshConfigId="ac02cedc-9d94-4588-888d-ca7f7ae1f5e6" sshConfig="root@43.139.143.207:22 password">
+      <webServer id="959d3b98-673a-4e7b-be06-91a865fd2d70" name="139 Nich 2C4G Rocky8">
+        <fileTransfer accessType="SFTP" host="139.198.172.110" port="22" sshConfigId="1c103987-9c20-4c1c-bede-7b02935ca2b8" sshConfig="139 Nich 2C4G Rocky8">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="f9f966f2-cbdb-424a-9410-f1ee3d36b741" name="139.102 Nich 2C4G Rocky8">
+        <fileTransfer accessType="SFTP" host="139.198.165.102" port="22" sshConfigId="dce96bf4-4395-4eb3-b354-bcbd6e9f8da5" sshConfig="139.102 Nich 2C4G Rocky8">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
     </option>
     <groups>
       <group>
-        <name>Local Server</name>
+        <name>Test</name>
         <servers>
           <name value="152" />
           <name value="158" />
         </servers>
       </group>
       <group>
-        <name>Public Sever</name>
+        <name>Production</name>
         <servers>
-          <name value="119.91.208.160" />
-          <name value="43.139.143.207" />
+          <name value="47 Lisa 2C2G Docker" />
+          <name value="119 Nich 4G2C CentOS7" />
+          <name value="43 Xiaowen 2C2G CentOS7" />
+          <name value="139 Nich 2C4G Rocky8" />
+          <name value="139.102 Nich 2C4G Rocky8" />
         </servers>
       </group>
     </groups>

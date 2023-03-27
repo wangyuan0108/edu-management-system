@@ -19,17 +19,22 @@ func Server() {
 	// 路由守卫
 	userGroup := server.Group("auth", middleware.AuthRequired)
 	{
-		//userGroup.GET("/", middleware.AuthRequired, api.ParseJWT) // 校验用户的JWT是否正确, 如果校验失败则进入不了用户路由
-
-		//server.POST("/login", controller.Login)
+		// 学院路由
 		userGroup.GET("/college", controller.College{}.GET)
 		userGroup.PATCH("/college", controller.College{}.PATCH)
 		userGroup.POST("/college", controller.College{}.POST)
 		userGroup.DELETE("/college", controller.College{}.DELETE)
 		userGroup.PUT("/college", controller.College{}.PUT)
+
+		// 上传路由
 		userGroup.PUT("/upload", controller.Upload)
+
+		// 专业路由
 		userGroup.GET("/specialty", controller.Specialty{}.GET)
 		userGroup.PATCH("/specialty", controller.Specialty{}.PATCH)
+
+		// 班级路由
+		userGroup.GET("/class", controller.Class{}.GET)
 
 		// 聊天路由
 		chatGroup := server.Group("ws")

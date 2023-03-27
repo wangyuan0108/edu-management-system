@@ -88,17 +88,17 @@ client.test("Request executed successfully", function() {
 %}
 
 ### 登录
-POST {{url}}/login
+POST {{url}}/auth
 Accept: application/json
 
 // 账号1
-{ "account" : "student", "password":"123456" }
+{ "account" : "213012020517", "password":"123456" }
 
 # 账号2
-# { "account" : "teacher", "password":"123456" }
+# { "account" : "20031155", "password":"123456" }
 
 # 账号3
-# { "account" : "admin", "password":"123456" }
+# { "account" : "ad123456", "password":"123456" }
 
 ### 获取student的用户历史消息
 GET {{url}}/historyMessage?account=student
@@ -144,16 +144,20 @@ Content-Disposition: form-data; name="file"; filename="avatar.svg"
 
 ### 获取专业列表列表
 GET {{url}}/auth/specialty?query=all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODExNzk4OTF9.xEepCb6g0zBdqwF5BwlJivLjPSo0MrqJBm-yTZevRB8
 
 ### 根据专业名称搜索
 GET {{url}}/auth/specialty?query=航空航天
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODExNzk4OTF9.xEepCb6g0zBdqwF5BwlJivLjPSo0MrqJBm-yTZevRB8
 
 ### 获取学院列表
 GET {{url}}/auth/college?query=all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODExNzk4OTF9.xEepCb6g0zBdqwF5BwlJivLjPSo0MrqJBm-yTZevRB8
 
 ### 获取学院与专业列表
 GET {{url}}/auth/college?query=specialty
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiYWQxMjM0NTYiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzk3NDY0ODd9.BBuXhnLJsl741Z7iEyWleAWoNXoHhLhfQpZhGl4nutI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODExNzk4OTF9.xEepCb6g0zBdqwF5BwlJivLjPSo0MrqJBm-yTZevRB8
+
+### 获取班级列表
+GET {{url}}/auth/class?query=生物学
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODExNzk4OTF9.xEepCb6g0zBdqwF5BwlJivLjPSo0MrqJBm-yTZevRB8

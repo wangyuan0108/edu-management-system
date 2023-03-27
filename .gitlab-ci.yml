@@ -78,5 +78,5 @@ job_deploy:
     #    - sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude={web,.cache,.idea,tmp} ./ root@192.168.0.158:/home/nginx/html/web/temp
     - sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude={web,.git,.cache,.idea,tmp} ./ root@192.168.0.158:/home/nginx/html/web/temp
     - echo "进入到主机root@192.168.0.158的/home/nginx/html/web/temp下执行./cmd/go_build.sh Golang部署script,执行完成之后删除/home/nginx/html/web/temp缓存目录"
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/temp'
+    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/temp && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/temp && rm -rf /home/nginx/html/web/dir.sh'
     - echo "任务完成"

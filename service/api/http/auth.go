@@ -5,6 +5,7 @@ import (
 	"edu-management-system/db"
 	"edu-management-system/helper"
 	"edu-management-system/schema"
+	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -18,7 +19,7 @@ var token string       // 用于保存JWT令牌
 var claim schema.Claim // JWT的标准加密方式
 var jwtKey []byte      // 用于签名的私钥
 
-func RoleAuth(person schema.LoginBasic) any {
+func RoleAuth(person schema.LoginBasic) (schema.Status, error) {
 	jwtKey = []byte(os.Getenv("JWT_KEY")) // 读取配置文件获取jwtKey私钥
 	issuer := os.Getenv("ISSUER")         // 读取配置文件获取签发者
 
@@ -38,13 +39,13 @@ func RoleAuth(person schema.LoginBasic) any {
 				Code:    http.StatusBadRequest,
 				Message: "查询失败,查询无结果:" + findErr.Error(),
 				Body:    nil,
-			}
+			}, nil
 		}
 		return schema.Status{
 			Code:    http.StatusBadRequest,
 			Message: "查询失败,数据库不存在该字段值:" + findErr.Error(),
 			Body:    nil,
-		}
+		}, findErr
 	}
 
 	// JWT结构体赋值
@@ -65,7 +66,7 @@ func RoleAuth(person schema.LoginBasic) any {
 			Code:    http.StatusBadRequest,
 			Message: "生成token失败:" + generateErr.Error(),
 			Body:    nil,
-		}
+		}, generateErr
 	}
 
 	// 根据前端传递的用户名与用户的数据库结构体的用户名比对, 正确继续下一步-
@@ -83,14 +84,14 @@ func RoleAuth(person schema.LoginBasic) any {
 					Token: token,
 					Data:  databasePerson,
 				},
-			}
+			}, nil
 		}
 		// 密码错误情况
 		return schema.Status{
 			Code:    http.StatusBadRequest,
 			Message: "验证失败,密码错误",
 			Body:    nil,
-		}
+		}, errors.New("验证失败,密码错误")
 	}
 
 	// 前端用户名与数据库的用户名不匹配情况
@@ -98,7 +99,7 @@ func RoleAuth(person schema.LoginBasic) any {
 		Code:    http.StatusNotFound,
 		Message: "账号输入错误,不存在该账号",
 		Body:    nil,
-	}
+	}, errors.New("账号输入错误,不存在该账号")
 }
 
 func ParseJWT(c *gin.Context) {
