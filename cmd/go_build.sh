@@ -33,4 +33,4 @@ docker build --tag goimage -f /home/nginx/html/web/temp/Dockerfile .
 # --name 容器名称
 docker run -d -p 4000:4000 --name goimage goimage
 
-curl 192.168.0.158:4000/
+curl 139.198.165.102:400/
