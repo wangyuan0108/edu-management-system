@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -40,4 +41,27 @@ func Mongo() *mongo.Client {
 		log.Println("运行Mongodb服务失败!" + collectionErr.Error())
 	}
 	return client
+}
+
+func TestFind(t *testing.T) {
+	ENV, err := godotenv.Read()
+	if err != nil {
+		log.Fatal("获取环境变量失败:", err.Error())
+	}
+	client, collectionErr := mongo.Connect(context.TODO(), options.Client().SetAuth(options.Credential{
+		Username: ENV["MONGODB_USERNAME"],
+		Password: ENV["MONGODB_PASSWORD"],
+	}).ApplyURI(ENV["MONGODB_URL"]))
+	if collectionErr != nil {
+		t.Error(collectionErr)
+	}
+	find, err := client.
+		Database("edu_system").
+		Collection("users").
+		Find(context.Background(), bson.D{{}})
+
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(find)
 }

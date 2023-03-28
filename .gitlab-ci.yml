@@ -40,7 +40,6 @@ job_golang:
     - mkdir -p .cache
     - export GOPATH="$CI_PROJECT_DIR/.cache"
     - ls
-    - bash ./cmd/clearCache.sh
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
     - go mod vendor
@@ -63,6 +62,8 @@ job_deploy:
   tags:
     - edu-front-end
   script:
+    - ls
+    - bash ./cmd/clearCache.sh
     - echo "正在生成索引缓存索引提供搜索安装速度"
     - yum makecache
     - echo "下载所需工具"
