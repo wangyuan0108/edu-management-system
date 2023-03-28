@@ -25,7 +25,7 @@ if [ $(docker images | grep goimage | awk '{print $1}') ]; then docker rmi -f go
 # 在Dockerfile当前目录的所有文件的镜像打包至标签为goimage的二进制文件可运行的Docker镜像
 # docker build --tag 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。
 
-docker build --tag goimage -f /home/nginx/html/web/temp/Dockerfile .
+docker build --tag goimage -f /home/nginx/html/web/backend_file/Dockerfile .
 
 # docker run 运行ddd
 # -d 后台运行容器，并返回容器ID
@@ -33,4 +33,5 @@ docker build --tag goimage -f /home/nginx/html/web/temp/Dockerfile .
 # --name 容器名称
 docker run -d -p 4000:4000 --name goimage goimage
 
+curl 192.168.0.158:4000/
 curl 139.198.165.102:4000/
