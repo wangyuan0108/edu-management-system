@@ -36,8 +36,8 @@ job_web:
     - count=$((count+1))
     - echo $count
     - export TAG=$count
-    - if [ ${#TAG} -gt 7 ]; then \
-      echo "TAG variable is greater than 7 characters" \
+    - if [ ${#TAG} -gt 7 ]; then
+      echo "TAG variable is greater than 7 characters" 
       fi
   only:
     - main
