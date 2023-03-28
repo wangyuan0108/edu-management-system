@@ -63,7 +63,6 @@ job_deploy:
     - edu-front-end
   script:
     - ls
-    - bash ./cmd/clearCache.sh
     - echo "正在生成索引缓存索引提供搜索安装速度"
     - yum makecache
     - echo "下载所需工具"
@@ -86,4 +85,5 @@ job_deploy:
     - echo "进入到主机root@139.198.165.102的/home/nginx/html/web/backend_file下执行./cmd/go_build.sh Golang部署script,执行完成之后删除/home/nginx/html/web/backend_file缓存目录"
     - sshpass -e ssh -o stricthostkeychecking=no root@139.198.165.102 'cd /home/nginx/html/web/backend_file && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/backend_file && rm -rf /home/nginx/html/temp/dir.sh && rm -rf /home/nginx/html/web/backend_file'
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/backend_file && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/backend_file && rm -rf /home/nginx/html/temp/dir.sh && rm -rf /home/nginx/html/web/backend_file'
+    - bash ./cmd/clearCache.sh
     - echo "任务完成"
