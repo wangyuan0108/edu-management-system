@@ -160,4 +160,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzM
 
 ### 获取班级列表
 GET {{url}}/auth/class?query=生物学
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODExNzk4OTF9.xEepCb6g0zBdqwF5BwlJivLjPSo0MrqJBm-yTZevRB8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50IjoiMjEzMDEyMDIwNTE3Iiwicm9sZSI6InN0dWRlbnQiLCJleHAiOjE2ODEyNjgzMTR9.c-XvKCEVwU5Ffo6tgkCQ2tEIkaOGHmwRng8Qa-DSOkA
