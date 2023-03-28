@@ -9,7 +9,7 @@ equal=$?
 # 检查该目录是否有文件, 存在删除目录, 没有则创建
 if ((equal == 0)); then
   echo "已存在临时目录,正在删除"
-  rm -rf /home/nginx/html/web/temp
+  rm -rf /home/nginx/html/web
 fi
 echo "正在创建临时目录"
-mkdir -p /home/nginx/html/web/temp
+mkdir -p /home/nginx/html/web/backend_file
