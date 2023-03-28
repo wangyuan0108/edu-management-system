@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@192.168.0.158" uuid="532927f5-d5d5-443a-b448-1f97f81059ba">
+    <data-source source="LOCAL" name="Test Sercer" uuid="532927f5-d5d5-443a-b448-1f97f81059ba">
       <driver-ref>mongo</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
       <jdbc-url>mongodb://192.168.0.158:27017</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="0@192.168.0.158" uuid="9b55e143-dbca-44b1-98a3-a4e77773628b">
+    <data-source source="LOCAL" name="0@Dev" uuid="9b55e143-dbca-44b1-98a3-a4e77773628b">
       <driver-ref>redis</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>jdbc.RedisDriver</jdbc-driver>
       <jdbc-url>jdbc:redis://192.168.0.158:6379/0</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="Production" uuid="aae7b3b0-5168-4bc6-9d7c-dc604bfa29f4">
+      <driver-ref>mongo</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
+      <jdbc-url>mongodb://119.91.208.160:27017</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
