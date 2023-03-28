@@ -11,6 +11,7 @@ cache:
     - ./web/client/dist
     - ./app
     - ./vendor
+    - ./tag.txt
 
 job_web:
   stage: web
@@ -22,12 +23,6 @@ job_web:
     - npm install pnpm -g
     - cd ./web && pnpm install && ls && cd ./client && pnpm install
     - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
-    - ls
-    - count=$TAG
-    - echo $count
-    - count=$((count+1))
-    - echo $count
-    - export TAG=$count
   only:
     - main
 
@@ -67,23 +62,8 @@ job_deploy:
     - yum makecache
     - echo "下载所需工具"
     - yum install -y sshpass rsync openssh-clients
-    - echo "排除node_modules目录,将./web/client/dist前端文件打包为dist.tgz压缩包完成之后删除./web/client/dist所有文件"
-    - tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
-    - echo "加载环境变量"
-    - export SSHPASS="$PASSWORD"
-    - echo "传输./cmd/dir.sh目录script与dist.tgz前端压缩包发送至主机47.120.5.83的/home/nginx/html/temp目录下"
-    - sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@47.120.5.83:/home/nginx/html/temp
-    - sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@192.168.0.158:/home/nginx/html/temp
-    - echo "进入主机47.120.5.83的/home/nginx/html/web目录下执行dir.sh目录script与解压dist.tgz前端压缩包,完成后删除前端压缩包"
-    - sshpass -e ssh -o stricthostkeychecking=no root@47.120.5.83 'cd /home/nginx/html/temp && ls && bash dir.sh && ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web && ls /home/nginx/html/temp && rm -rf /home/nginx/html/temp/dist.tgz'
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/temp && ls && bash dir.sh && ls /home/nginx/html/web && tar -xzvf dist.tgz -C /home/nginx/html/web && ls /home/nginx/html/temp && rm -rf /home/nginx/html/temp/dist.tgz'
-    - echo "删除本地无用dist.tgz文件"
-    - rm -rf dist.tgz
-    - echo "传输Golang文件除了web前端目录,.cache缓存,.ideaIDE缓存,tmp缓存目录以外的所有文件发送至主机root@139.198.165.102的/home/nginx/html/web/backend_file目录下"
-    - sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude={web,.git,.cache,.idea,tmp} ./ root@139.198.165.102:/home/nginx/html/web/backend_file
-    - sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude={web,.git,.cache,.idea,tmp} ./ root@192.168.0.158:/home/nginx/html/web/backend_file
-    - echo "进入到主机root@139.198.165.102的/home/nginx/html/web/backend_file下执行./cmd/go_build.sh Golang部署script,执行完成之后删除/home/nginx/html/web/backend_file缓存目录"
-    - sshpass -e ssh -o stricthostkeychecking=no root@139.198.165.102 'cd /home/nginx/html/web/backend_file && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/backend_file && rm -rf /home/nginx/html/temp/dir.sh && rm -rf /home/nginx/html/web/backend_file'
-    - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/backend_file && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/backend_file && rm -rf /home/nginx/html/temp/dir.sh && rm -rf /home/nginx/html/web/backend_file'
+    - bash ./cmd/web_build.sh
+    - bash ./cmd/go_build.sh
+    - bash ./cmd/go_deploy.sh
     - bash ./cmd/clearCache.sh
     - echo "任务完成"

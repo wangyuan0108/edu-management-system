@@ -1,13 +1,16 @@
 #!/bin/bash
+tag=$(cat ./tag.txt)
+tag=$((tag+1))
+echo $tag>./tag.txt
 
-ls $CI_PROJECT_DIR/web/node_modules
-ls $CI_PROJECT_DIR/web/client/node_modules
-ls $CI_PROJECT_DIR/web/client/dist
-ls $CI_PROJECT_DIR/app
-ls $CI_PROJECT_DIR/vendor
+ls "$CI_PROJECT_DIR"/web/node_modules
+ls "$CI_PROJECT_DIR"/web/client/node_modules
+ls "$CI_PROJECT_DIR"/web/client/dist
+ls "$CI_PROJECT_DIR"/app
+ls "$CI_PROJECT_DIR"/vendor
 
 #if [ "$TAG" -gt 0 ]; then
-if(("$TAG" == 0)); then
+if(("$tag" == 0)); then
   echo "删除第7次产生的缓存"
   rm -rf "$CI_PROJECT_DIR"/web/node_modules
   rm -rf "$CI_PROJECT_DIR"/web/client/node_modules

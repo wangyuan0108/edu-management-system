@@ -9,6 +9,7 @@ import (
 
 func TestRedisDB(t *testing.T) {
 	ENV, err := godotenv.Read()
+	t.Log("ENV:", ENV)
 	var Redis *redis.Client
 	Redis = redis.NewClient(&redis.Options{
 		Addr:        ENV["REDIS_URL"],
