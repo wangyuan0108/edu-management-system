@@ -1,4 +1,5 @@
 #!/bin/bash
+# 该脚本用于Go项目部署
 
 echo "传输Golang文件除了web前端目录,.cache缓存,.ideaIDE缓存,tmp缓存目录以外的所有文件发送至主机root@139.198.165.102的/home/nginx/html/web/backend_file目录下"
 sshpass -e rsync -a -e "ssh -o stricthostkeychecking=no" --exclude={web,.git,.cache,.idea,tmp} ./ root@139.198.165.102:/home/nginx/html/web/backend_file

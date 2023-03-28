@@ -12,7 +12,7 @@ func Server() {
 	server := gin.Default()
 	server.Use(middleware.Cors()) // 跨域处理
 	server.PUT("/register", controller.Register)
-	server.GET("/", func(c *gin.Context) {
+	server.Any("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Pong")
 	})
 	server.POST("/auth", controller.Auth)

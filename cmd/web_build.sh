@@ -1,10 +1,8 @@
 #!/bin/bash
+# 该脚本用于前端部署
 
 echo "排除node_modules目录,将./web/client/dist前端文件打包为dist.tgz压缩包完成之后删除./web/client/dist所有文件"
 tar -czvf dist.tgz --exclude=node_modules -C ./web/client/dist . --remove-files
-
-echo "加载环境变量"
-export SSHPASS="$PASSWORD"
 
 echo "传输./cmd/dir.sh目录script与dist.tgz前端压缩包发送至主机47.120.5.83的/home/nginx/html/temp目录下"
 sshpass -e scp -o stricthostkeychecking=no -r ./cmd/dir.sh dist.tgz root@47.120.5.83:/home/nginx/html/temp

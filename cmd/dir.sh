@@ -1,4 +1,5 @@
 #!/bin/bash
+# 该脚本用于在主机上创建临时目录
 
 # 需要创建的目录
 dir=/home/nginx/html

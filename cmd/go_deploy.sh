@@ -1,4 +1,5 @@
 #!/bin/bash
+# 该脚本用于打包后端镜像
 
 # 检测goimage(.gitlab-ci.yml提供的golang打包后的二进制文件的名称)是否已在运行, 如果已在运行则停止该容器
 # docker ps 列出Docker容器列表
