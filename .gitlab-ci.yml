@@ -18,13 +18,9 @@ job_web:
   tags:
     - edu-front-end
   script:
-    - npm config get registry
     - npm config set registry https://registry.npmmirror.com
-    - npm config get registry
     - npm install pnpm -g
-    - ls
-    - bash ./cmd/clearCache.sh
-    - cd ./web && pnpm install &&ls&& cd ./client && pnpm install
+    - cd ./web && pnpm install && ls && cd ./client && pnpm install
     - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
     - ls
     - count=$TAG
@@ -44,6 +40,7 @@ job_golang:
     - mkdir -p .cache
     - export GOPATH="$CI_PROJECT_DIR/.cache"
     - ls
+    - bash ./cmd/clearCache.sh
     - go env -w GOPROXY=https://proxy.golang.com.cn,direct
     - go get
     - go mod vendor
