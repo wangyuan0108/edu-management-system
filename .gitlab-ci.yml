@@ -23,22 +23,15 @@ job_web:
     - npm config get registry
     - npm install pnpm -g
     - ls
+    - bash ./cmd/clearCache.sh
     - cd ./web && pnpm install &&ls&& cd ./client && pnpm install
     - pnpm eslint:fix && pnpm stylelint:fix && pnpm build
     - ls
-    - ls $CI_PROJECT_DIR/web/node_modules
-    - ls $CI_PROJECT_DIR/web/client/node_modules
-    - ls $CI_PROJECT_DIR/web/client/dist
-    - ls $CI_PROJECT_DIR/app
-    - ls $CI_PROJECT_DIR/vendor
     - count=$TAG
     - echo $count
     - count=$((count+1))
     - echo $count
     - export TAG=$count
-    - if [ ${#TAG} -gt 7 ]; then
-      echo "TAG variable is greater than 7 characters" 
-      fi
   only:
     - main
 
@@ -58,10 +51,10 @@ job_golang:
     - go build -o app
     - chmod +x app
   # 提供生产包
-  artifacts:
-    paths:
-      - ./web/client/dist
-      - ./app
+  #artifacts:
+  #  paths:
+  #    - ./web/client/dist
+  #    - ./app
 
 job_deploy:
   stage: deploy
@@ -96,4 +89,3 @@ job_deploy:
     - sshpass -e ssh -o stricthostkeychecking=no root@139.198.165.102 'cd /home/nginx/html/web/backend_file && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/backend_file && rm -rf /home/nginx/html/temp/dir.sh && rm -rf /home/nginx/html/web/backend_file'
     - sshpass -e ssh -o stricthostkeychecking=no root@192.168.0.158 'cd /home/nginx/html/web/backend_file && bash ./cmd/go_build.sh && rm -rf /home/nginx/html/web/backend_file && rm -rf /home/nginx/html/temp/dir.sh && rm -rf /home/nginx/html/web/backend_file'
     - echo "任务完成"
-
